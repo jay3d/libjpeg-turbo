@@ -32,9 +32,9 @@ if(WIN32)
   set(DEFFILE ../win/jpeg${SO_MAJOR_VERSION}.def)
 endif()
 if(MSVC)
-  configure_file(${CMAKE_SOURCE_DIR}/win/jpeg.rc.in
-    ${CMAKE_BINARY_DIR}/win/jpeg.rc)
-  set(JPEG_SRCS ${JPEG_SRCS} ${CMAKE_BINARY_DIR}/win/jpeg.rc)
+  configure_file(${PROJECT_SOURCE_DIR}/win/jpeg.rc.in
+    ${PROJECT_BINARY_DIR}/win/jpeg.rc)
+  set(JPEG_SRCS ${JPEG_SRCS} ${PROJECT_BINARY_DIR}/win/jpeg.rc)
 endif()
 add_library(jpeg SHARED ${JPEG_SRCS} ${DEFFILE} ${SIMD_TARGET_OBJECTS}
   ${SIMD_OBJS} $<TARGET_OBJECTS:jpeg12> $<TARGET_OBJECTS:jpeg16>)
@@ -106,7 +106,7 @@ target_link_libraries(example jpeg)
 add_executable(jcstest ../jcstest.c)
 target_link_libraries(jcstest jpeg)
 
-install(TARGETS jpeg EXPORT ${CMAKE_PROJECT_NAME}Targets
+install(TARGETS jpeg EXPORT ${PROJECT_NAME}Targets
   INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
